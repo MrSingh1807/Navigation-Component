@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main_nav_host"
+    app:startDestination="@id/homeFragment">
+
+    <fragment
+        android:id="@+id/homeFragment"
+        android:name="com.example.navigation.HomeFragment"
+        android:label="Home"
+        tools:layout="@layout/fragment_home" >
+        <action
+            android:id="@+id/action_homeFragment_to_fragmentChooseReceiver"
+            app:destination="@id/fragmentChooseReceiver" />
+        <action
+            android:id="@+id/action_homeFragment_to_viewTransactionsFragment"
+            app:destination="@id/viewTransactionsFragment"
+            app:popUpTo="@id/homeFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_viewBalanceFragment"
+            app:destination="@id/viewBalanceFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/fragmentChooseReceiver"
+        android:name="com.example.navigation.FragmentChooseReceiver"
+        android:label="Receiver"
+        tools:layout="@layout/fragment_choose_receiver" >
+        <action
+            android:id="@+id/action_fragmentChooseReceiver_to_fragmentSpecifyAmount"
+            app:destination="@id/fragmentSpecifyAmount" />
+    </fragment>
+    <fragment
+        android:id="@+id/fragmentSpecifyAmount"
+        android:name="com.example.navigation.FragmentSpecifyAmount"
+        android:label="Send Money - @{receiverName}"
+        tools:layout="@layout/fragment_specify_amount">
+        <argument
+            android:name="receiverName"
+            app:argType="string" />
+        <argument
+            android:name="amount"
+            app:argType="integer" />
+        <action
+            android:id="@+id/action_fragmentSpecifyAmount_to_homeFragment"
+            app:destination="@id/homeFragment"
+            app:popUpTo="@id/homeFragment"
+            app:popUpToInclusive="true" />
+        <deepLink
+            android:id="@+id/deepLink"
+            app:uri="www.navigation.com/{receiverName}/{amount}" />
+    </fragment>
+    <fragment
+        android:id="@+id/viewBalanceFragment"
+        android:name="com.example.navigation.fragments.ViewBalanceFragment"
+        android:label="View Balance"
+        tools:layout="@layout/fragment_view_balance" />
+    <fragment
+        android:id="@+id/viewTransactionsFragment"
+        android:name="com.example.navigation.fragments.ViewTransactionsFragment"
+        android:label="View Transactions"
+        tools:layout="@layout/fragment_view_transactions" />
+</navigation>
